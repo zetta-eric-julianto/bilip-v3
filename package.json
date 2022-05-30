@@ -1,6 +1,6 @@
 {
   "name": "bilip-v3",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "The source code of Bilip V3",
   "main": "server.js",
   "scripts": {
