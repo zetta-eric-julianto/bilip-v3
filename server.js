@@ -135,7 +135,7 @@ app.post("/", express.json(), (request, response) => {
           rawPayload: true,
         })
       );
-    } else if (choose == 2) {
+    } else if (choice == 2) {
       var payloadData = {
         richContent: [
           [
@@ -158,7 +158,7 @@ app.post("/", express.json(), (request, response) => {
                         "https://raw.githubusercontent.com/algonacci/Free-CDN/main/succes_icon.png",
                     },
                   },
-                  text: "Yes, I'm sure",
+                  text: "Yes, I'm sure to arrange the meeting",
                 },
                 {
                   image: {
@@ -228,11 +228,31 @@ app.post("/", express.json(), (request, response) => {
     }
   }
 
+  function arrangeMeetingConfirmationYes(agent) {
+    agent.add(
+      "Thanks Tom! Alright, we will setup a meeting for you and will send the detail of the meeting to you email."
+    );
+  }
+
+  function arrangeMeetingConfirmationNo(agent) {
+    agent.add("Alright, no problem.");
+    agent.add("Is there anything I can help?");
+  }
+
   var intentMap = new Map();
 
+  // Arrange a meeting with Academic Director
   intentMap.set("Demo", demo);
   intentMap.set("A06_ArrangeMeeting", arrangeMeeting);
   intentMap.set("A06_ArrangeMeeting - custom", getMeetingDate);
+  intentMap.set(
+    "A06_ArrangeMeeting - custom - yes",
+    arrangeMeetingConfirmationYes
+  );
+  intentMap.set(
+    "A06_ArrangeMeeting - custom - no",
+    arrangeMeetingConfirmationNo
+  );
 
   agent.handleRequest(intentMap);
 });
